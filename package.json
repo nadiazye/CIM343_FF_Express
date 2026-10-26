@@ -1,0 +1,25 @@
+{
+  "name": "cim343_ff_express",
+  "version": "1.0.0",
+  "description": "N/A",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadiazye/CIM343_FF_Express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nadiazye/CIM343_FF_Express/issues"
+  },
+  "homepage": "https://github.com/nadiazye/CIM343_FF_Express#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
