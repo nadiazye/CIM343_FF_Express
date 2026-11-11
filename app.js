@@ -18,6 +18,10 @@ app.get("/home", (req, res) =>{
     res.render("home", {title: "My home page"})
 });
 
+app.get("/form", (req, res)=>{
+    res.render("survey", {title: "Survey"});
+});
+
 app.get("/:name", (req, res) =>{
     res.send("My name is: " + req.params.name);
 });
