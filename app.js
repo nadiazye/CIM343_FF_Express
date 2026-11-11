@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const cookieParser = require("cookie-parser");
 
 app.set("view engine", "hbs");
 
 app.use(express.static("public"));
+
+app.use(cookieParser());
 
 app.get("/",(req,res)=>{
     res.send("Hello from Express");
@@ -20,6 +23,33 @@ app.get("/home", (req, res) =>{
 
 app.get("/form", (req, res)=>{
     res.render("survey", {title: "Survey"});
+});
+
+app.post("/form", (req, res)=>{
+    //res.send("form processed");
+    const animal = req.body.animal; //Animal that I selected from the form
+
+    let votes = {
+        narwhal:0,
+        seal:0,
+        penguin:0
+    };
+
+    if(req.cookies.votes !== undefined){
+        votes = req.cookies.votes;
+    }
+
+    if(votes[animal] === undefined){
+        votes[animal] = 0
+    }
+
+    votes[animal] = votes[animal] + 1;
+
+    res.cookie("votes", votes, {maxAge: 7 * 24 * 60 * 60 * 1000});
+
+    res.render("response", {
+        votes: votes
+    });
 });
 
 app.get("/:name", (req, res) =>{
