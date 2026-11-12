@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 app.set("view engine", "hbs");
 
 app.use(express.static("public"));
-
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 app.get("/",(req,res)=>{
@@ -55,6 +55,11 @@ app.post("/form", (req, res)=>{
 app.get("/:name", (req, res) =>{
     res.send("My name is: " + req.params.name);
 });
+
+app.delete("/clear", (req, res)=>{
+    res.clearCooki9e("votes");
+    res.send("Votes cleared" + "<a href='/form'>Back to form</a>")
+})
 
 
 //end of code
