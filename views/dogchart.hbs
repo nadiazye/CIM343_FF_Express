@@ -1,0 +1,43 @@
+<h1>{{title}}</h1>
+
+<div style="max-width: 600px;">
+  <canvas id="dogChart"></canvas>
+</div>
+
+<h2>Dogs entered</h2>
+<ul>
+  {{#each dogs}}
+    <li>{{name}} ({{breed}})</li>
+  {{/each}}
+</ul>
+
+<a href="/dogs">Add another dog</a> | <button id="clearDogs">Clear dogs</button>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  // e.g. { Labrador: 2, Poodle: 1 }
+  let counts = {{{counts}}};
+
+  new Chart(document.getElementById("dogChart"), {
+    type: "bar",
+    data: {
+      labels: Object.keys(counts),
+      datasets: [{
+        label: "Dogs per breed",
+        data: Object.values(counts),
+        backgroundColor: "#e15759"
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0 } }
+      }
+    }
+  });
+
+  document.getElementById("clearDogs").addEventListener("click", function () {
+    fetch("/dogs/clear", { method: "DELETE" }).then(function () {
+      window.location.href = "/dogs";
+    });
+  });
+</script>
